@@ -123,7 +123,7 @@ class MCASExtract:
 
     def check_report_parameters(self, params):
         # check to see if requested params are in our report
-        print("vals \n{}\n{}".format(sorted(params.keys()), sorted(self.reports.keys())))
+        debug("vals \n{}\n{}".format(sorted(params.keys()), sorted(self.reports.keys())))
         if sorted(params.keys()) != sorted(self.reports.keys()):
             print(" Param Keys: {}")
             for x in params:
@@ -195,7 +195,7 @@ class MCASExtract:
 
         try:
             debug("request response was {}".format(res))
-            print("data back is: ".format(res.content))
+            debug("data back is: {}".format(res.content))
             self.data_frame = pd.read_excel(res.content)
             # any processing of data (adding columns, etc) goes here.
             # Here we chop off the first (header) row
