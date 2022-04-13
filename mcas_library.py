@@ -123,7 +123,8 @@ class MCASExtract:
 
     def check_report_parameters(self, params):
         # check to see if requested params are in our report
-        if params.keys() != self.reports.keys():
+        print("vals \n{}\n{}".format(sorted(params.keys()), sorted(self.reports.keys())))
+        if sorted(params.keys()) != sorted(self.reports.keys()):
             print(" Param Keys: {}")
             for x in params:
                 print("   {}".format(x))
