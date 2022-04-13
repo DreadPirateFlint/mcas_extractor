@@ -68,10 +68,10 @@ class MCASExtract:
 
     def __init__(self, mcas_url):
         self.url = mcas_url
-        resp = session.get(report_url)
+        resp = session.get(self.url)
         if resp.status_code != 200:
             raise Exception("Bad http code of {}".format(resp.status_code))
-        debug("Parsing form at {}".format(report_url))
+        debug("Parsing form at {}".format(self.url))
 
         bs1 = BeautifulSoup(resp.content, features="html.parser")
         forms = bs1.find_all("form")
@@ -105,7 +105,7 @@ class MCASExtract:
         if self.reports is None:
             print("Error:  Can't find selects information.  Is the URL correct?")
             exit(-1)
-        debug("Showing possible options for page {}".format(report_url))
+        debug("Showing possible options for page {}".format(self.url))
         for x in self.reports:
             debug("{} => {}".format(x, self.reports[x]))
         return self.reports
@@ -116,7 +116,7 @@ class MCASExtract:
         if self.reports is None:
             print("Error:  Can't find select boxes information. Is the URL Correct?")
             exit(-1)
-        debug("Showing possible options for page {}".format(report_url))
+        debug("Showing possible options for page {}".format(self.url))
         for x in self.reports:
             print("{} => {}".format(x, self.reports[x]))
         return self.reports
@@ -194,8 +194,8 @@ class MCASExtract:
 
         try:
             debug("request response was {}".format(res))
+            print("data back is: ".format(res.content))
             self.data_frame = pd.read_excel(res.content)
-
             # any processing of data (adding columns, etc) goes here.
             # Here we chop off the first (header) row
             # before saving as a CSV for later concatenation
