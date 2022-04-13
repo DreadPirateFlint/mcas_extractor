@@ -172,8 +172,6 @@ class MCASExtract:
         except MCASException as e:
             raise MCASException(e)
 
-        reqdict['ctl00$ContentPlaceHolder1$hfExport'] = "Excel"
-
         for r in reqdict:
             debug("{} = {}".format(r, reqdict[r]))
         # debug("Requesting:{}".format(reqdict))
@@ -214,6 +212,12 @@ class MCASExtract:
     def set_dataframe(self, df=None):
         if df is not None:
             self.data_frame = df
+
+    def get_url(self):
+        return self.url
+
+    def set_url(self, theurl):
+        self.url = theurl
 
     # Inserts a column into the data frame at the specified zero-index-based location.
     # All parameters are required
