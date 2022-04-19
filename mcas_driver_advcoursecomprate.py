@@ -1,9 +1,3 @@
-
-
-import os.path
-
-# import requests
-import pandas as pd
 from mcas_library import *
 
 
@@ -42,5 +36,5 @@ try:
                 csvfilenamebase = os.path.join(output_directory, csvfilenamebase)
                 report.write_csv(csvfilenamebase)
 except MCASException as e:
-    print("Error: {}".format(e))
+    print("MCASExtract Error: {}".format(e))
     exit(-1)

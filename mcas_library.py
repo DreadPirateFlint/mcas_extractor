@@ -118,7 +118,7 @@ class MCASExtract:
             exit(-1)
         debug("Showing possible options for page {}".format(self.url))
         for x in self.reports:
-            print("{} => {}".format(x, self.reports[x]))
+            print("request_params['{}'] = {}".format(x, self.reports[x]))
         return self.reports
 
     def check_report_parameters(self, params):
@@ -126,10 +126,10 @@ class MCASExtract:
         debug("vals \n{}\n{}".format(sorted(params.keys()), sorted(self.reports.keys())))
         if sorted(params.keys()) != sorted(self.reports.keys()):
             print(" Param Keys: {}")
-            for x in params:
+            for x in sorted(params):
                 print("   {}".format(x))
             print(" Required Report Keys:")
-            for z in self.reports:
+            for z in sorted(self.reports):
                 print("   {}".format(z))
             raise MCASException("Error: Request and Form do not have same set of keys")
 
@@ -200,9 +200,9 @@ class MCASExtract:
             # any processing of data (adding columns, etc) goes here.
             # Here we chop off the first (header) row
             # before saving as a CSV for later concatenation
-            df = self.data_frame.iloc[1:, :]
+            # df = self.data_frame.iloc[1:, :]
             # now add a year column
-            self.data_frame.insert(loc=0, column='Year', value=year, allow_duplicates=True)
+            # self.data_frame.insert(loc=0, column='Year', value=year, allow_duplicates=True)
             return self.data_frame
         except Exception as e:
             print("Fatal Error: Decode of data failed: {}".format(e))
@@ -243,6 +243,7 @@ class MCASExtract:
             writefn = xlsxfilename
         else:
             writefn = self.xlsfn
+        print("Writing XLSX output to {}".format(writefn))
         self.data_frame.to_excel(writefn, index=False)
 
     def write_csv(self, csvfilename=None):
@@ -254,6 +255,7 @@ class MCASExtract:
             writefn = csvfilename
         else:
             writefn = self.csvfn
+        print("Writing CSV output to {}".format(writefn))
         self.data_frame.to_csv(writefn, header=False, index=False)
 
 
