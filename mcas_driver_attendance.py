@@ -16,9 +16,9 @@ report.print_report_options()
 # quit()
 # Set the parameters we'd like to loop over
 request_params = dict()
-request_params['ctl00$ContentPlaceHolder1$ddReportType'] = ['DISTRICT', 'SCHOOL']
+request_params['ctl00$ContentPlaceHolder1$ddReportType'] = ['SCHOOL', 'DISTRICT']
 request_params['ctl00$ContentPlaceHolder1$ddYear'] = ['2018', '2019']
-request_params['ctl00$ContentPlaceHolder1$ddStudentGroup'] = ['ALL']
+request_params['ctl00$ContentPlaceHolder1$ddStudentGroup'] = ['ALL', 'FE', 'MA', 'ED', 'HN', 'LEP', 'FL', 'SWD', 'AA', 'AI', 'AS', 'HI', 'MR', 'NH', 'WH']
 
 print("Requesting following parameters: ")
 for req_param in request_params:
@@ -39,8 +39,11 @@ try:
 
                 report.get_report_real(parameters=param2)
                 report.remove_header_row()
-                # now add a year column
+                
+                # now add a year and subgroup column
                 report.add_column(0, 'Year', b)
+                report.add_column(1, 'Subgroup', e)
+
                 csvfilenamebase = "{}-{}-{}-{}.csv".format(output_prefix, a, b, e)
                 csvfilenamebase = os.path.join(output_directory, csvfilenamebase)
                 report.write_csv(csvfilenamebase)
