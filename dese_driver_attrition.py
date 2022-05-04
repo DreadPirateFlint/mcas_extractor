@@ -2,10 +2,10 @@ from mcas_library import *
 from time import sleep
 
 # initialize the extractor object
-report = MCASExtract("https://profiles.doe.mass.edu/statereport/dropout.aspx")
+report = MCASExtract("https://profiles.doe.mass.edu/statereport/attrition.aspx")
 
 # the prefix for this report
-output_prefix = "DROPOUT_REPORT"
+output_prefix = "ATTRITION_REPORT"
 
 # set the output directory
 output_directory = "outdir"
@@ -17,9 +17,9 @@ report.print_report_options()
 # quit()
 # Set the parameters we'd like to loop over
 request_params = dict()
-request_params['ctl00$ContentPlaceHolder1$ddReportType'] = ['DISTRICT']
-request_params['ctl00$ContentPlaceHolder1$ddYear'] = ['2021']
-request_params['ctl00$ContentPlaceHolder1$ddSubgroup'] = ['ALL', 'LEP', 'ED', 'HN', 'FL', 'SWD', 'AA', 'AI', 'AS', 'HI', 'MR', 'NH', 'WH']
+request_params['ctl00$ContentPlaceHolder1$ddReportType'] = ['SCHOOL']
+request_params['ctl00$ContentPlaceHolder1$ddYear'] = ['2015']
+request_params['ctl00$ContentPlaceHolder1$ddSubgroup'] = ['LEP', 'ED', 'HN', 'FL', 'SWD', 'AA', 'AI', 'AS', 'HI', 'MR', 'NH', 'WH']
 
 print("Requesting following parameters: ")
 for req_param in request_params:
