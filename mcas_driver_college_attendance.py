@@ -17,12 +17,12 @@ report.print_report_options()
 # quit()
 # Set the parameters we'd like to loop over
 request_params = dict()
-request_params['ctl00$ContentPlaceHolder1$ddReportType'] = ['SCHOOL']
-request_params['ctl00$ContentPlaceHolder1$ddYear'] = ['2018', '2017', '2016', '2015']
-request_params['ctl00$ContentPlaceHolder1$ddInOutState'] = ['ALL', 'IN_STATE', 'OUT_OF_STATE']
-request_params['ctl00$ContentPlaceHolder1$ddAttendRange'] = ['MARCH']
-request_params['ctl00$ContentPlaceHolder1$ddPctDenomType'] = ['COLL_ATTEND']
-request_params['ctl00$ContentPlaceHolder1$ddStudentGroup'] = ['ALL', 'LEP', 'ECODIS', 'HIGH', 'LOWINC', 'SPED', 'BL', 'AI', 'AS', 'HS', 'MR', 'HP', 'WH']
+request_params['ddReportType'] = ['SCHOOL']
+request_params['ddYear'] = ['2018', '2017', '2016', '2015']
+request_params['ddInOutState'] = ['ALL', 'IN_STATE', 'OUT_OF_STATE']
+request_params['ddAttendRange'] = ['MARCH']
+request_params['ddPctDenomType'] = ['COLL_ATTEND']
+request_params['ddStudentGroup'] = ['ALL', 'LEP', 'ECODIS', 'HIGH', 'LOWINC', 'SPED', 'BL', 'AI', 'AS', 'HS', 'MR', 'HP', 'WH']
 
 print("Requesting following parameters: ")
 for req_param in request_params:
@@ -30,18 +30,20 @@ for req_param in request_params:
 
 try:
     param2 = dict()
-    for a in request_params['ctl00$ContentPlaceHolder1$ddReportType']:
-        for b in request_params['ctl00$ContentPlaceHolder1$ddYear']:
-            for c in request_params['ctl00$ContentPlaceHolder1$ddInOutState']:
-                for d in request_params['ctl00$ContentPlaceHolder1$ddAttendRange']:
-                    for e in request_params['ctl00$ContentPlaceHolder1$ddPctDenomType']:
-                        for f in request_params['ctl00$ContentPlaceHolder1$ddStudentGroup']:
-                            param2['ctl00$ContentPlaceHolder1$ddReportType'] = a
-                            param2['ctl00$ContentPlaceHolder1$ddYear'] = b
-                            param2['ctl00$ContentPlaceHolder1$ddInOutState'] = c
-                            param2['ctl00$ContentPlaceHolder1$ddAttendRange'] = d
-                            param2['ctl00$ContentPlaceHolder1$ddPctDenomType'] = e
-                            param2['ctl00$ContentPlaceHolder1$ddStudentGroup'] = f
+    for a in request_params['ddReportType']:
+        for b in request_params['ddYear']:
+            for c in request_params['ddInOutState']:
+                for d in request_params['ddAttendRange']:
+                    for e in request_params['ddPctDenomType']:
+                        for f in request_params['ddStudentGroup']:
+                            param2['ddReportType'] = a
+                            param2['ddYear'] = b
+                            param2['ddInOutState'] = c
+                            param2['ddAttendRange'] = d
+                            param2['ddPctDenomType'] = e
+                            param2['ddStudentGroup'] = f
+                            param2['ctl00$ContentPlaceHolder1$hfExport'] = 'Excel'
+                            param2['hfExport'] = 'Excel'
 
                             sleep(0.5)
 
@@ -49,6 +51,7 @@ try:
                             for req_param in param2:
                                 print("request_params['{}'] = {}".format(req_param, param2[req_param]))
 
+                            report.check_parameters = False    
                             report.get_report_real(parameters=param2)
                             report.remove_header_row()
                                 
