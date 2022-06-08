@@ -43,7 +43,6 @@ try:
                             param2['ddPctDenomType'] = e
                             param2['ddStudentGroup'] = f
                             param2['ctl00$ContentPlaceHolder1$hfExport'] = 'Excel'
-                            param2['hfExport'] = 'Excel'
 
                             sleep(0.5)
 
@@ -63,6 +62,6 @@ try:
                             csvfilenamebase = "{}-{}-{}-{}-{}.csv".format(a, b, c, d, f)
                             csvfilenamebase = os.path.join(output_directory, a, csvfilenamebase)
                             report.write_csv(csvfilenamebase)
-except MCASException as e:
-    print("MCASExtract Error: {}".format(e))
+except MCASException as z:
+    print("MCASExtract Error: {}".format(z))
     exit(-1)
